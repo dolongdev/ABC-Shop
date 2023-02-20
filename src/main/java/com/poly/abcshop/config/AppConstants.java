@@ -1,0 +1,9 @@
+package com.poly.abcshop.config;
+
+public class AppConstants {
+    public static final Integer PAGE_NUMBER= 1;
+    public static final Integer PAGE_SIZE = 6;
+    public static final String SORT_BY = "productId";
+    public static final String SORT_DIR = "asc";
+    public static final String USER_LOGIN = null;
+}

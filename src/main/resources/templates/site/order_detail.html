@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/site/layout-home}">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div th:replace="/site/fragments/just-navbar"></div>
+
+        <!-- Cart Start -->
+        <div class="container-fluid pt-5">
+            <div class="row px-xl-5">
+                <div class="col-lg table-responsive mb-5">
+                    <table class="table table-bordered text-center mb-0">
+                        <thead class="bg-secondary text-dark">
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+                        </tr>
+                        </thead>
+                        <tbody class="align-middle">
+                        <th:block th:each="item : ${items}">
+                            <tr>
+                                <td class="align-middle" th:text="${item.product.name}">
+<!--                                    <img th:src="@{/site/img/proc/{image}(image=${c.image})}"-->
+<!--                                         alt="" style="width: 50px;"></td>-->
+                                <td class="align-middle" th:text="${item.product.price}"></td>
+                                <td class="align-middle" th:text="${item.quantity}"></td>
+                                <td class="align-middle" th:text="${item.product.price * item.quantity}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Cart End -->
+    </div>
+</body>
+</html>
