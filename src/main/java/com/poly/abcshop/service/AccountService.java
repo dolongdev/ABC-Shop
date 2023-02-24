@@ -11,5 +11,9 @@ public interface AccountService {
 
     AccountDto update(AccountDto dto, String username);
 
+    Boolean existAccount(String username);
+
+    List<AccountDto> searchAccount(String keyword);
+
     List<AccountDto> list();
 }

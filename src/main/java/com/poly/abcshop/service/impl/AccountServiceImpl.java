@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto create(AccountDto entity) {
+        entity.setRegisterDate(new Date());
         Account account = this.accountRepo.save(this.modelMapper.map(entity, Account.class));
         return this.modelMapper.map(account, AccountDto.class);
     }
@@ -43,6 +45,20 @@ public class AccountServiceImpl implements AccountService {
         account.setFullname(dto.getFullname());
         this.accountRepo.save(account);
         return this.modelMapper.map(account, AccountDto.class);
+    }
+
+    @Override
+    public Boolean existAccount(String username) {
+        return this.accountRepo.existsAccountByUsername(username);
+    }
+
+    @Override
+    public List<AccountDto> searchAccount(String keyword) {
+        List<Account> list = this.accountRepo.findByUsernameContaining(keyword);
+
+        List<AccountDto> dtos = list.stream()
+                .map((account) -> this.modelMapper.map(account, AccountDto.class)).collect(Collectors.toList());
+        return dtos;
     }
 
     @Override

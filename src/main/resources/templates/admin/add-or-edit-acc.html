@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/layout-admin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="card">
+                                <div th:if="${collection == 'add'}" class="card-header">
+                                    Thêm mới <strong>tài khoản</strong>
+                                </div>
+                                <div th:if="${collection == 'update'}" class="card-header">
+                                    Cập nhật <strong>tài khoản</strong>
+                                </div>
+                                <form th:action="@{/administration/accounts/addOrEdit?collection={collection}(collection=${collection})}"
+                                      method="post" th:object="${item}" >
+                                <div class="card-body card-block">
+                                    <div class="form-horizontal">
+                                        <div class="row form-group" th:if="${message != null}">
+                                            <div class="col-12 col-md-9">
+                                                <span class="help-block" style="color: red;" th:text="${message}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">Họ tên</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" id="fullName" name="fullname" th:field="*{fullname}"
+                                                       placeholder="Enter Fullname..." class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">Email</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="email" id="email" name="email" th:field="*{email}"
+                                                       placeholder="Enter Email..." class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">Số điện thoại</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="phone" th:field="*{phone}" required
+                                                       placeholder="Enter Number Phone..." class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">Tên đăng nhập</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input th:if="${collection == 'update'}"
+                                                       type="text" name="username" th:field="*{username}"
+                                                       placeholder="Enter Username..." class="form-control" readonly>
+                                                <input th:if="${collection == 'add'}"
+                                                       type="text" name="username" th:field="*{username}" required
+                                                       placeholder="Enter Username..." class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">Password</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" name="password" required th:field="*{password}"
+                                                       placeholder="Enter Password..." class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">Thông tin thêm</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <textarea name="about" id="about" th:field="*{about}"
+                                                          cols="30" rows="3" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button th:if="${collection == 'add'}"
+                                            type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-dot-circle-o"></i> Thêm
+                                    </button>
+                                    <button th:if="${collection == 'update'}"
+                                            type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-dot-circle-o"></i> Cập nhật
+                                    </button>
+                                    <button type="reset" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:replace="/admin/fragments/footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
